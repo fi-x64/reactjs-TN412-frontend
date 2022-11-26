@@ -8,7 +8,7 @@ import UserTodos from "./UserTodos";
 export default function UserDetails({ userID, isPending }) {
   const { data: user } = useQuery(
     ["user", userID],
-    () => getData(`http://localhost:3000/users/${userID}`),
+    () => getData(`http://localhost:8080/users/${userID}`),
     { suspense: true }
   );
 
@@ -19,8 +19,8 @@ export default function UserDetails({ userID, isPending }) {
       </div>
 
       <Avatar
-        src={`http://localhost:3030/img/${user.img}`}
-        fallbackSrc="http://localhost:3000/img/avatar.gif"
+        src={`http://localhost:8080/img/${user.img}`}
+        fallbackSrc="http://localhost:8080/img/avatar.gif"
         alt={user.username}
       />
 
