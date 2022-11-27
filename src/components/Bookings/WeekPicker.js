@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import { useRef } from "react";
 import {
   FaChevronLeft,
   FaCalendarDay,
@@ -6,13 +6,13 @@ import {
   FaCalendarCheck
 } from "react-icons/fa";
 
-import {addDays, shortISO} from "../../utils/date-wrangler";
-import {useBookingsParams} from "./bookingsHooks";
+import { addDays, shortISO } from "../../utils/date-wrangler";
+import { useBookingsParams } from "./bookingsHooks";
 
-export default function WeekPicker () {
+export default function WeekPicker() {
   const textboxRef = useRef();
 
-  const {date, setBookingsDate: goToDate} = useBookingsParams();
+  const { date, setBookingsDate: goToDate } = useBookingsParams();
 
   const dates = {
     prev: shortISO(addDays(date, -7)),
@@ -27,7 +27,7 @@ export default function WeekPicker () {
           className="btn"
           onClick={() => goToDate(dates.prev)}
         >
-          <FaChevronLeft/>
+          <FaChevronLeft />
           <span>Prev</span>
         </button>
 
@@ -35,7 +35,7 @@ export default function WeekPicker () {
           className="btn"
           onClick={() => goToDate(dates.today)}
         >
-          <FaCalendarDay/>
+          <FaCalendarDay />
           <span>Today</span>
         </button>
 
@@ -43,16 +43,16 @@ export default function WeekPicker () {
           <input
             type="text"
             ref={textboxRef}
-            placeholder="e.g. 2020-09-02"
+            placeholder="e.g. 2022-11-26"
             id="wpDate"
-            defaultValue="2020-06-24"
+            defaultValue="2022-11-26"
           />
 
           <button
             onClick={() => goToDate(textboxRef.current.value)}
             className="go btn"
           >
-            <FaCalendarCheck/>
+            <FaCalendarCheck />
             <span>Go</span>
           </button>
         </span>
@@ -62,7 +62,7 @@ export default function WeekPicker () {
           onClick={() => goToDate(dates.next)}
         >
           <span>Next</span>
-          <FaChevronRight/>
+          <FaChevronRight />
         </button>
       </p>
     </div>

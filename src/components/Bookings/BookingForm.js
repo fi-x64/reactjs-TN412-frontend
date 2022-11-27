@@ -1,10 +1,10 @@
-import {Fragment} from "react";
-import {FaTrash, FaCloudUploadAlt} from "react-icons/fa";
+import { Fragment } from "react";
+import { FaTrash, FaCloudUploadAlt } from "react-icons/fa";
 
 import useFormState from "../Bookables/useFormState";
 
-export default function BookingForm ({booking, bookable, onSave, onDelete}) {
-  const {state, handleChange} = useFormState(booking);
+export default function BookingForm({ booking, bookable, onSave, onDelete }) {
+  const { state, handleChange } = useFormState(booking);
   const isNew = booking?.id === undefined;
 
   return booking ? (
@@ -47,7 +47,7 @@ export default function BookingForm ({booking, bookable, onSave, onDelete}) {
             className="btn btn-delete"
             onClick={() => onDelete(booking)}
           >
-            <FaTrash/>
+            <FaTrash />
             <span>Delete</span>
           </button>
         )}
@@ -55,7 +55,7 @@ export default function BookingForm ({booking, bookable, onSave, onDelete}) {
           className="btn"
           onClick={() => onSave(state)}
         >
-          <FaCloudUploadAlt/>
+          <FaCloudUploadAlt />
           <span>{isNew ? "Add Booking" : "Update"}</span>
         </button>
       </p>

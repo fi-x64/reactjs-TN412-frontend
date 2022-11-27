@@ -20,7 +20,6 @@ export function useBookings(bookableId, startDate, endDate) {
     ["bookings", bookableId, start, end],
     () => getData(`${urlRoot}?${queryString}`)
   );
-
   return {
     bookings: query.data ? transformBookings(query.data) : {},
     ...query

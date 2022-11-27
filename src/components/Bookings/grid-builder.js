@@ -6,17 +6,16 @@ export function getGrid(bookable, startDate) {
   const dates = bookable.days.sort().map(
     d => shortISO(addDays(startDate, d.id))
   );
-
   const sessions = bookable.sessions.map(i => sessionNames[i.id]);
+
   const grid = {};
-  console.log("Check sessions: ", sessions);
   sessions.forEach(session => {
     grid[session] = {};
     dates.forEach(date => grid[session][date] = {
       session,
       date,
       bookableId: bookable.id,
-      title: ""
+      title: bookable.bookings.filter(i => (i.session === session) && (i.date === date) && i.title).map(i => i.title)
     });
   });
 
@@ -37,7 +36,6 @@ export function transformBookings(bookingsArray) {
     }
 
     bookings[session][date] = booking;
-
-    return bookings;
+    return { bookings, sessions: session, dates: date };
   }, {});
 }

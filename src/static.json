@@ -149,6 +149,7 @@
   ],
   "bookings": [],
   "sessions": [
+    "",
     "Breakfast",
     "Morning",
     "Lunch",
@@ -156,12 +157,13 @@
     "Evening"
   ],
   "days": [
-    "Sunday",
+    "",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
+    "Sunday"
   ]
 }
