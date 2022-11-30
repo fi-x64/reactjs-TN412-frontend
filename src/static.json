@@ -149,7 +149,7 @@
   ],
   "bookings": [],
   "sessions": [
-    "",
+    "empty",
     "Breakfast",
     "Morning",
     "Lunch",
@@ -157,7 +157,7 @@
     "Evening"
   ],
   "days": [
-    "",
+    "empty",
     "Monday",
     "Tuesday",
     "Wednesday",

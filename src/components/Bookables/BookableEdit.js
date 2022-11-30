@@ -63,7 +63,7 @@ function useBookable(id) {
   const queryClient = useQueryClient();
   return useQuery(
     ["bookable", id],
-    () => getData(`http://localhost:/bookables/${id}`),
+    () => getData(`http://localhost:8080/bookables/${id}`),
     {
       // refetching causes problems after deleting a bookable
       refetchOnWindowFocus: false,

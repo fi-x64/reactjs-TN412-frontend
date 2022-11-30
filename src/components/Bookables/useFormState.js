@@ -17,6 +17,7 @@ export default function useFormState(data) {
   }
 
   function handleChecked(e) {
+    console.log("Check e.target: ", e.target);
     const { name, value, checked } = e.target;
     const values = new Set(state[name]);
     const intValue = parseInt(value, 10);
