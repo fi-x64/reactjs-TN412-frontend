@@ -40,6 +40,7 @@ export default function BookableEdit() {
   function handleSubmit() {
     // call the mutation function for updating the bookable
     updateBookable(formState.state);
+    console.log("Check formState.state: ", formState.state);
   }
 
   if (isUpdateError || isDeleteError) {
