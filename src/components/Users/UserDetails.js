@@ -19,7 +19,7 @@ export default function UserDetails({ userID, isPending }) {
       </div>
 
       <Avatar
-        src={`http://localhost:8080/img/${user.img}`}
+        src={user.img ? `http://localhost:8080/img/${user.img}` : `http://localhost:8080/img/avatar.gif`}
         fallbackSrc="http://localhost:8080/img/avatar.gif"
         alt={user.username}
       />

@@ -8,7 +8,6 @@ export default function UsersList({ user, setUser, isPending }) {
     () => getData("http://localhost:8080/users"),
     { suspense: true }
   );
-  console.log('Check users:', users);
   return (
     <ul className="users items-list-nav">
       {users.map(u => (
