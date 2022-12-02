@@ -23,6 +23,7 @@ export default function useFormState(data) {
     const intValue = parseInt(value, 10);
 
     values.delete(intValue);
+
     if (checked) values.add(intValue);
 
     setState({

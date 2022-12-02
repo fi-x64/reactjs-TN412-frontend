@@ -1,7 +1,6 @@
-import { lazy, Suspense, Fragment, useState } from "react";
+import { lazy, Suspense, Fragment, useState, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Login from "../components/Auth/login.component";
-import Register from "../components/Auth/register.component"
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,7 +14,13 @@ import PageSpinner from "./UI/PageSpinner";
 import { UserProvider } from "./Users/UserContext";
 
 import ErrorBoundary from "./UI/ErrorBoundary";
-import AuthService from "../services/auth.service";
+
+import Login from "../components/Auth/Login";
+import Register from "../components/Auth/Register";
+
+import { logout } from "../slices/auth";
+
+import EventBus from "../common/EventBus";
 
 const BookablesPage = lazy(() => import("./Bookables/BookablesPage"));
 const BookingsPage = lazy(() => import("./Bookings/BookingsPage"));
@@ -24,13 +29,22 @@ const UsersPage = lazy(() => import("./Users/UsersPage"));
 const queryClient = new QueryClient();
 
 export default function App() {
-  const userData = AuthService.getCurrentUser();
-  const [user, setUser] = useState(userData);
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  function logOut() {
-    AuthService.logout();
-    setUser(undefined)
-  }
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  useEffect(() => {
+    EventBus.on("logout", () => {
+      logOut();
+    });
+
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, [currentUser, logOut]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -62,8 +76,8 @@ export default function App() {
               </nav>
               <ul className="header-end">
                 <li>
-                  {user ? <Link to="/profile" className="btn btn-header">
-                    <span>{user.username}</span>
+                  {currentUser ? <Link to="/profile" className="btn btn-header">
+                    <span>{currentUser.username}</span>
                   </Link> :
                     <Link to="/login" className="btn btn-header">
                       <FaSignInAlt />
@@ -72,7 +86,7 @@ export default function App() {
                   }
                 </li>
                 <li>
-                  {user ? <Link to="/logout" className="btn btn-header" onClick={logOut}>
+                  {currentUser ? <Link to="/logout" className="btn btn-header" onClick={logOut}>
                     <FaSignOutAlt />
                     <span>Logout</span>
                   </Link> :
